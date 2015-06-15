@@ -366,7 +366,9 @@ void GenScalarField(Vertex min, Vertex max)
                     {
                         ker = Kernel(dist / Neighborhood);
                         weight = ker / s;
-                        rbar += dist;// part_rad*weight;
+                        //rbar += dist;// part_rad*weight;
+                        rbar += dist * weight; //not sure if this dist is ri or not.
+                        
                         xbar.x += node->x * weight;
                         xbar.y += node->y * weight;
                         xbar.z += node->z * weight;
@@ -381,7 +383,7 @@ void GenScalarField(Vertex min, Vertex max)
                 ydist = y - xbar.y;
                 zdist = z - xbar.z;
 
-                scalar_field[i][j][k].s = (sqrt((xdist * xdist) + (ydist * ydist) + (zdist * zdist))) - part_rad;
+                scalar_field[i][j][k].s = (sqrt((xdist * xdist) + (ydist * ydist) + (zdist * zdist))) - rbar;
             }
         }
     }
